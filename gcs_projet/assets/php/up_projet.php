@@ -2,22 +2,21 @@
 include "config.php";
 try 
 {
-	if (isset($_POST['upproduit'])) 
+	if (isset($_POST['upprojet'])) 
 	{
 	# si le bouton modiffié est cliquez
 		
 		# recuperation des variables a partir du formulaire: extract($_POST);
-			$nom_produit		    = $_POST['nom_produit'];
-			$description_produit	    = $_POST['description_produit'];
-			$id_categorie_produit	= $_POST['id_categorie_produit'];
-			$id_produit				    = $_POST['id_produit'];
-
-		#requete pour verifier que la catégorie est unique
-		$req_verification = "SELECT * FROM produit WHERE nom_produit = :nom_produit AND description_produit = :description_produit AND id_categorie_produit = :id_categorie_produit AND id_produit <> :id_produit";
+			$nom_projet		    = $_POST['nom_projet'];
+			$date_projet	    = $_POST['date_projet'];
+			$id_utilisateur	    = $_POST['id'];
+			
+		#requete pour verifier que le projet est unique
+		$req_verification = "SELECT * FROM projet WHERE nom_projet = :nom_projet AND date_projet = :date_projet AND id_utilisateur = :id_utilisateur AND id_projet <> :id_projet";
 
 		$verification=$pdo->prepare($req_verification);
 
-		$verification->execute(array(':nom_produit'=>$nom_produit,':description_produit'=>$description_produit,':id_categorie_produit'=>$id_categorie_produit,':id_produit'=>$id_produit));
+		$verification->execute(array(':nom_projet'=>$nom_projet,':date_projet'=>$date_projet,':id_utilisateur'=>$id_utilisateur,':id_projet'=>$id_projet));
 
 		$data = $verification->fetch();
 
@@ -26,25 +25,28 @@ try
 			# code
 			?>
 				<script type='text/javascript'>
-					alert('Cette catégorie de produit existe déjà.');
+					alert('Cet projet existe déjà.');
 				</script>
 			<?php
 		}
 		else
 		{
 			# Si tout est Bon
-				# req de modiffication dans la table categorie_produit
-				$req_update = "UPDATE produit SET nom_produit = :nom_produit AND description_produit = :description_produit AND id_categorie_produit = :id_categorie_produit WHERE id_produit =:id_produit";
+				# req de modiffication dans la table projet
+				$req_update = "UPDATE projet SET nom_projet = :nom_projet AND date_projet = :date_projet AND id_utilisateur =:id_utilisateur WHERE id_projet = :id_projet";
 
 				# preparation de la req
 				$statement_update = $pdo->prepare($req_update);
 
 				# execution de req en passant les variables
-				$statement_update->execute(array('nom_produit'=>$nom_produit,':description_produit'=>$description_produit,':id_categorie_produit'=>$id_categorie_produit,':id_produit'=>$id_produit));
+				$statement_update->execute(array(':nom_projet'=>$nom_projet,':date_projet'=>$date_projet,':id_utilisateur'=>$id_utilisateur,':id_projet'=>$id_projet));
+
+
+				
 			?>
 
 				<script type='text/javascript'>
-					alert('Catégorie modifiée avec succès.');
+					alert('Projet modifié avec succès.');
 				</script>
 
 			<?php 
@@ -61,5 +63,5 @@ catch (Exception $e)
 				?>
 <script type="text/javascript">
 	// Redirection automatique aprés 0secondes
-	setTimeout(function(){window.location.href="../../produit.php";},0);
+	setTimeout(function(){window.location.href="../../projet.php";},0);
 </script>

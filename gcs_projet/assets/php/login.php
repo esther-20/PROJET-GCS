@@ -1,5 +1,5 @@
 <?php 
-//connexion base de données
+//connexion base de donnÃ©es
 include("config.php");
 
 session_start();
@@ -58,7 +58,7 @@ if(isset($_POST['login']))
             {
              ?>        
              <script type="text/javascript">
-                alert('Compte inexistant, Veuillez créer un compte svp!');
+                alert('Compte inexistant, Veuillez crÃ©er un compte svp!');
                 setTimeout(function(){window.location.href="../../index.html";},1000);
              </script>
              <?php
@@ -79,12 +79,19 @@ if(isset($_POST['login']))
           ?>      
              <script type="text/javascript">
                 alert('Veuillez renseigner tous les champs SVP!');
-                setTimeout(function(){window.location.href="../../login.html";},100);
+                setTimeout(function(){window.location.href="../../login.html";},1000);
              </script>
              <?php
 
     }
     
 }
-
+else{
+    ?>
+     <script type="text/javascript">
+        alert('Connectez Vous pour acceder ï¿½ la plateforme');
+        setTimeout(function(){window.location.href="../../login.html";},100);
+     </script>
+     <?php
+}
  ?>

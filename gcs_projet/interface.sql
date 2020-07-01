@@ -27,7 +27,7 @@ CREATE TABLE `appartenir` (
   `id_produit` int(11) NOT NULL,
   `quantite_produit` int(11) NOT NULL,
   `statut_produit` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_projet`, `id_produit`),
+  PRIMARY KEY (`id_projet`,`id_produit`),
   KEY `appartenir_projet_fk` (`id_projet`),
   KEY `appartenir_produit_fk` (`id_produit`),
   CONSTRAINT `appartenir_produit_fk` FOREIGN KEY (`id_produit`) REFERENCES `produit` (`id_produit`),
@@ -41,6 +41,7 @@ CREATE TABLE `appartenir` (
 
 LOCK TABLES `appartenir` WRITE;
 /*!40000 ALTER TABLE `appartenir` DISABLE KEYS */;
+INSERT INTO `appartenir` VALUES (31,2,9,'livre'),(31,9,2,'livre');
 /*!40000 ALTER TABLE `appartenir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +56,7 @@ CREATE TABLE `categorie_produit` (
   `id_categorie_produit` int(11) NOT NULL AUTO_INCREMENT,
   `libelle_categorie_produit` varchar(20) NOT NULL,
   PRIMARY KEY (`id_categorie_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,30 +65,9 @@ CREATE TABLE `categorie_produit` (
 
 LOCK TABLES `categorie_produit` WRITE;
 /*!40000 ALTER TABLE `categorie_produit` DISABLE KEYS */;
+INSERT INTO `categorie_produit` VALUES (4,'Media gateway FXS11'),(6,'Serveurs1'),(18,'media12');
 /*!40000 ALTER TABLE `categorie_produit` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
---
--- Table structure for table `produit`
---
-
-DROP TABLE IF EXISTS `produit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `produit` (
-  `id_produit` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_produit` varchar(20) NOT NULL,
-  `description_produit` tinytext NOT NULL,
-  `id_categorie_produit` int(11) NOT NULL,
-  PRIMARY KEY (`id_produit`),
-  KEY `produit_categorie_produit_fk` (`id_categorie_produit`),
-  CONSTRAINT `produit_categorie_produit_fk` FOREIGN KEY (`id_categorie_produit`) REFERENCES `categorie_produit` (`id_categorie_produit`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
-
 
 --
 -- Table structure for table `historique`
@@ -114,28 +94,31 @@ LOCK TABLES `historique` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `module`
+-- Table structure for table `produit`
 --
 
-DROP TABLE IF EXISTS `module`;
+DROP TABLE IF EXISTS `produit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `module` (
-  `id_mod` int(11) NOT NULL AUTO_INCREMENT,
-  `nom_mod` varchar(20) NOT NULL,
-  `quantite_mod` int(7) NOT NULL,
-  `description_mod` tinytext NOT NULL,
-  PRIMARY KEY (`id_mod`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `produit` (
+  `id_produit` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_produit` varchar(20) NOT NULL,
+  `description_produit` tinytext NOT NULL,
+  `id_categorie_produit` int(11) NOT NULL,
+  PRIMARY KEY (`id_produit`),
+  KEY `produit_categorie_produit_fk` (`id_categorie_produit`),
+  CONSTRAINT `produit_categorie_produit_fk` FOREIGN KEY (`id_categorie_produit`) REFERENCES `categorie_produit` (`id_categorie_produit`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `module`
+-- Dumping data for table `produit`
 --
 
-LOCK TABLES `module` WRITE;
-/*!40000 ALTER TABLE `module` DISABLE KEYS */;
-/*!40000 ALTER TABLE `module` ENABLE KEYS */;
+LOCK TABLES `produit` WRITE;
+/*!40000 ALTER TABLE `produit` DISABLE KEYS */;
+INSERT INTO `produit` VALUES (2,'IX-50','nfxvnc,hn',6),(9,'U31P','ERQGHSH ',4),(12,'ix 100','en bon etat',6);
+/*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -148,12 +131,12 @@ DROP TABLE IF EXISTS `projet`;
 CREATE TABLE `projet` (
   `id_projet` int(11) NOT NULL AUTO_INCREMENT,
   `nom_projet` varchar(20) NOT NULL,
-  `date_heure_projet` datetime NOT NULL,
   `id_utilisateur` int(11) NOT NULL,
+  `date_projet` date NOT NULL,
   PRIMARY KEY (`id_projet`),
   KEY `projet_utilisateur_fk` (`id_utilisateur`),
   CONSTRAINT `projet_utilisateur_fk` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id_utilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,6 +145,7 @@ CREATE TABLE `projet` (
 
 LOCK TABLES `projet` WRITE;
 /*!40000 ALTER TABLE `projet` DISABLE KEYS */;
+INSERT INTO `projet` VALUES (31,'PCELFI',27,'0000-00-00'),(42,'SIDAM',27,'0000-00-00'),(43,'aaaa',33,'0000-00-00');
 /*!40000 ALTER TABLE `projet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +191,7 @@ CREATE TABLE `utilisateur` (
   PRIMARY KEY (`id_utilisateur`),
   KEY `utilisateur_type_utilisateur_fk` (`id_typutilisateur`),
   CONSTRAINT `utilisateur_type_utilisateur_fk` FOREIGN KEY (`id_typutilisateur`) REFERENCES `type_utilisateur` (`id_typutilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +200,7 @@ CREATE TABLE `utilisateur` (
 
 LOCK TABLES `utilisateur` WRITE;
 /*!40000 ALTER TABLE `utilisateur` DISABLE KEYS */;
-INSERT INTO `utilisateur` VALUES (1,'MEDA','deborah','deborahmeda@gmail.com','88410991',0,1),(2,'TRAORE','Eden','youssouftraoreeden@gmail.com','Eden2020',40554134,3),(3,'GLOBAL','globalcs','globalcs@gmail.com','123456789',8085000,2);
+INSERT INTO `utilisateur` VALUES (27,'MEDA','ESTHER','deborahmeda@gmail.com','123456789',88410991,2),(33,'KOMENAN','Franck Vianney','vianneyfranck@gmail.com','Franck@123',47175117,2),(34,'NIAVA','M\'BOUA N\'drin juvet alex','alexjuvetniava@gmail.com','123456789',7837253,3),(35,'LATTIER','Grah dominique  Urbain ','llattier21 @gmail.com','123456789',78151897,3);
 /*!40000 ALTER TABLE `utilisateur` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +213,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-04 17:44:37
+-- Dump completed on 2020-06-26 17:37:14

@@ -1,11 +1,13 @@
 <?php
 require_once "assets/php/auth0.php";
 include "assets/php/config.php";
+include 'assets/php/functions.php';
+session_start();
 include "assets/php/init_utilisateur.php";
 include "assets/php/query.php";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -83,13 +85,12 @@ include "assets/php/query.php";
         </a>
       </li>
 
- <!-- <li>
+ <!--  <li>
       <a href="projet_produit.php">
           <i class="zmdi zmdi-assignment-o"></i> <span>Projets_Produits</span>
           </a>
-    </li> -->
-
-      <!--<li>
+    </li> 
+     <li>
         <a href="profile.html">
           <i class="zmdi zmdi-face"></i> <span>Profile</span>
         </a>
@@ -110,7 +111,7 @@ include "assets/php/query.php";
       <li class="sidebar-header">LABELS</li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
       <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>-->
+      <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li> -->
 
     </ul>
    
@@ -126,32 +127,11 @@ include "assets/php/query.php";
        <i class="icon-menu menu-icon"></i>
      </a>
     </li>
-    <li class="nav-item">
-      <!--<form class="search-bar">
-        <input type="text" class="form-control" placeholder="Enter keywords">
-         <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-      </form>-->
-    </li>
   </ul>
      
   <ul class="navbar-nav align-items-center right-nav-link">
-    <!--<li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-envelope-open-o"></i></a>
+     <!--  <i class="fa fa-envelope-open-o"></i></a> -->
     </li>
-    <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-bell-o"></i></a>
-    </li>
-    <li class="nav-item language">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-        </ul>
-    </li>-->
     <li class="nav-item">
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
         <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
@@ -162,20 +142,14 @@ include "assets/php/query.php";
            <div class="media">
              <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
             <div class="media-body">
-            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-            <p class="user-subtitle">mccoy@example.com</p>
+            <h6 class="mt-2 user-title"><?php echo $_SESSION['nom_utilisateur'] ?> </h6>
+            <p class="user-subtitle"><?php echo  $_SESSION['email_utilisateur'] ?></p>
             </div>
            </div>
           </a>
         </li>
         <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+        <li class="dropdown-item"> <a href="assets/php/logout.php"><i class="icon-power mr-2"></i> Deconnexion</li></a>
       </ul>
     </li>
   </ul>
@@ -198,7 +172,7 @@ include "assets/php/query.php";
                   <p class="mb-0 text-white small-font"><a href=liste_équipements_livres.php>Liste de tous les équipements </a></p>
                 </div>
             </div>-->
-            <div class="col-12 col-lg-6 col-xl-6 border-light">
+             <!-- <div class="col-12 col-lg-6 col-xl-6 border-light">
                 <div class="card-body">
                   <p class="mb-0 text-black small-font"><a href=liste_equipements_livres.php>Liste des equipements livres</a></p>
                 </div>
@@ -208,41 +182,47 @@ include "assets/php/query.php";
                 <div class="card-body">
                   <p class="mb-0 text-black small-font"><a href=liste_equipements_non_livres.php>Liste des equipements non livres</a></p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
- </div> 
+ </div>  
 
 
  <div class="card mt-3">
     <div class="card-content">
         <div class="row row-group m-0">
             <div class="col-12 col-lg-6 col-xl-3 border-light">
+              <a href="dashboard.php">
                 <div class="card-body">
-                  <h5 class="text-black mb-0">Projets <span class="float-right"><i class="fa fa-shopping-cart"></i></span></h5>
+                  <h5 class="text-white mb-0">Tous Projets  <span class="float-right"><!-- <i class="fa fa-shopping-cart"></i> --></span></h5><!-- <h2><?php //echo $count_encours ; ?></h2> -->
                     <div class="progress my-3" style="height:5px;">
-                       <div class="progress-bar" style="width:60%"></div>
+                       <div class="progress-bar" style="width:100%"></div>
                     </div>
                   <p class="mb-0 text-white small-font">Total Orders <span class="float-right">+4.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
                 </div>
+                </a>
             </div>
             <div class="col-12 col-lg-6 col-xl-3 border-light">
+               <a href="termine.php">
                 <div class="card-body">
-                  <h5 class="text-white mb-0">Projets en cours <span class="float-right"><i class="fa fa-usd"></i></span></h5>
-                    <div class="progress my-3" style="height:5px;">
-                       <div class="progress-bar" style="width:60%"></div>
+                  <h5 class="text-white mb-0">Projets en cours<span class="float-right"><!-- <i class="fa fa-usd"></i> --></span></h5><!-- <h2><?php //echo $count_termine ; ?></h2> -->
+                  <div class="progress my-3" style="height:5px;">
+                       <div class="progress-bar" style="width:100%"></div>
                     </div>
                   <p class="mb-0 text-white small-font">Total Revenue <span class="float-right">+1.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
                 </div>
+                </a>
             </div>
             <div class="col-12 col-lg-6 col-xl-3 border-light">
+               <a href="total.php">
                 <div class="card-body">
-                  <h5 class="text-white mb-0">Projets termines <span class="float-right"><i class="fa fa-eye"></i></span></h5>
+                  <h5 class="text-white mb-0">Projets termines <span class="float-right"><!-- <i class="fa fa-eye"></i> --></span></h5><!-- <h2><?php //echo $count_total ; ?></h2> -->
                     <div class="progress my-3" style="height:5px;">
-                       <div class="progress-bar" style="width:60%"></div>
+                       <div class="progress-bar" style="width:100%"></div>
                     </div>
                   <p class="mb-0 text-white small-font">Visitors <span class="float-right">+5.2% <i class="zmdi zmdi-long-arrow-up"></i></span></p>
                 </div>
+                </a>
             </div>
         </div>
     </div>
@@ -251,7 +231,7 @@ include "assets/php/query.php";
   <div class="row">
    <div class="col-12 col-lg-12">
      <div class="card">
-       <div class="card-header">liste projets
+      <!--  <div class="card-header">liste projets
       <div class="card-action">
              <div class="dropdown">
              <a href="javascript:void();" class="dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown">
@@ -266,43 +246,50 @@ include "assets/php/query.php";
                </div>
               </div>
              </div>
-     </div>
+     </div> -->
          <div class="table-responsive">
                  <table class="table align-items-center table-flush table-borderless">
                   <thead>
                    <tr>
-                      <th width="25%">Projet</th>
-                      <th width="25%">Produit</th>
-                      <th width="25%">Quantite commandee</th>
-                      <th width="25%">Quantite livree</th>
-                      <th width="25%">Actions</th>
+                      <th width="40%">Projet</th>
+                      <th width="40%">statut</th>
+                     <!--  <th width="25%">Quantite commandee</th>
+                      <th width="25%">Quantite livree</th> -->
+                      <th width="20%">Actions</th>
                    </tr>
                    </thead>
                    <tbody>
                     <?php
-
-                                            while ($row_appartenir=$statement_appartenir->fetch())
+                                 while ($row_appartenir=$statement_appartenir->fetch())
+                                            {
+                                                $id_projet=$row_maint['id_projet'];
+                                                $query_projet="SELECT * FROM projet WHERE id_projet=:id_projet ";
+                                                $statement_projet=$pdo->prepare($query_projet);
+                                                $statement_projet->execute(array(':id_projet'=>$id_projet));
+                                                $row_projet=$statement_projet->fetch();
+                                           /* while ($row_projet=$statement_projet->fetch())
                                             {
                                                 $id_projet=$row_projet['id_projet'];
                                                 $query_projet="SELECT * FROM projet WHERE id_projet=:id_projet ";
                                                 $statement_projet=$pdo->prepare($query_projet);
                                                 $statement_projet->execute(array(':id_projet'=>$id_projet));
                                                 $row_projet=$statement_projet->fetch();
-
-                                                $id_produit=$row_produit['id_produit'];
+*/
+                                                /*$id_produit=$row_produit['id_produit'];
                                                 $query_produit="SELECT * FROM produit WHERE id_produit=:id_produit ";
                                                 $statement_produit=$pdo->prepare($query_produit);
                                                 $statement_produit->execute(array(':id_produit'=>$id_produit));
-                                                $row_produit=$statement_produit->fetch();
+                                                $row_produit=$statement_produit->fetch();*/
                                                 
 
                                                 echo "<tr>";
-                                                echo "<td><p class='c_name'>".$row_appartenir['nom_appartenir'];
-                                                echo "<td><span class='email'>".$row_utilisateur['email_utilisateur']."</span></td>";
-                                                echo "<td><i class=''></i>".$row_projet['nom_projet']."</td>";
-                                                echo "<td><i class=''></i>".$row_produit['libelle_produit']."</td>";
+                                                 echo "<td><p class='c_name'>".$row_appartenir['nom_projet']."//".$row_projet['nom_projet']."</p></td>";
+                                                /*echo "<td><p class='c_name'>".$row_projet['nom_projet'];*/
+                                                /*echo "<td><span class='email'>".$row_utilisateur['email_utilisateur']."</span></td>";*/
+                                                echo "<td><i class=''></i>".$row_appartenir['statut']."</td>";
+                                                /*echo "<td><i class=''></i>".$row_produit['libelle_produit']."</td>";
                                                 echo "<td><i class=''></i>".$row_quantite_commandee['quantite_produit']."</td>";
-                                                echo "<td><i class=''></i>".$row_quantite_livree['quantite_produit']."</td>";
+                                                echo "<td><i class=''></i>".$row_quantite_livree['quantite_produit']."</td>";*/
 
 
                                                 echo "<td><a class='btn btn-info'>Modifier</a> <a class='btn btn-danger' href='delete/delete_utilisateur.php?id_appartenir=$row_appartenir[id_appartenir]\" onClick=\"return confirm('Voulez-vous vraiment supprimer cet appartenir ?')\'>Supprimer</a></td>";
@@ -320,6 +307,53 @@ include "assets/php/query.php";
 
 
                     <tr>
+                       <?php
+                                            while ($row_maint=$statement_maint->fetch())
+                                            {
+                                                $id_client=$row_maint['id_client'];
+                                                $query_client="SELECT * FROM client WHERE id_client=:id_client ";
+                                                $statement_client=$pdo->prepare($query_client);
+                                                $statement_client->execute(array(':id_client'=>$id_client));
+                                                $row_client=$statement_client->fetch();
+
+                                                //REQUETE LOCALISATION
+                                                $commune_id=$row_client['commune_id'];
+                                                $ville_id=$row_client['ville_id'];
+                                                $pays_id=$row_client['pays_id'];
+                                                //COMMUNE
+                                                $query_commune="SELECT * FROM commune WHERE commune_id=:commune_id ";
+                                                $statement_commune=$pdo->prepare($query_commune);
+                                                $statement_commune->execute(array(':commune_id'=>$commune_id));
+                                                $row_commune=$statement_commune->fetch();
+                                                //VILLE
+                                                $query_ville="SELECT * FROM ville WHERE ville_id=:ville_id ";
+                                                $statement_ville=$pdo->prepare($query_ville);
+                                                $statement_ville->execute(array(':ville_id'=>$ville_id));
+                                                $row_ville=$statement_ville->fetch();
+                                                //PAYS
+                                                $query_pays="SELECT * FROM pays WHERE pays_id=:pays_id ";
+                                                $statement_pays=$pdo->prepare($query_pays);
+                                                $statement_pays->execute(array(':pays_id'=>$pays_id));
+                                                $row_pays=$statement_pays->fetch();
+
+                                                echo "<tr>";
+                                                echo "<td><p class='c_name'>".$row_maint['lib_contrat']."//".$row_client['lib_client']."</p></td>";
+                                                echo "<td><span class='phone'><i class='zmdi zmdi-pin'></i>".$row_pays['pays_nom_fr'].",".$row_ville['ville_nom_fr'].",".$row_commune['commune_nom_fr']."</span></td>";
+                                                echo "<td><address><i class=''></i>".$row_maint['date_debut']."</address></td>";
+                                                echo "<td><address><i class=''></i>".$row_maint['date_fin'] ."</address></td>";
+                                                $today=strtotime(date('d-m-Y'));
+                                                if ($row_maint['statut_contrat'] >= $today ) 
+                                                {
+                                                    echo "<td><span class='badge badge-success'>En cours</span></td>";
+                                                }
+                                                else
+                                                {
+                                                    echo "<td><span class='badge badge-danger'>Expiré</span></td>";
+                                                }                                               
+                                                echo "</tr>";
+
+                                             }
+                                    ?>
                     <!-- <td>Iphone 5</td>
                     <td><img src="https://via.placeholder.com/110x110" class="product-img" alt="product img"></td>
                     <td>#9405822</td>

@@ -1,6 +1,8 @@
 <?php
 include "../assets/php/config.php";
 include "../assets/php/query.php";
+include 'assets/php/functions.php';
+session_start();
  ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,16 +42,16 @@ include "../assets/php/query.php";
  
   <!--Start sidebar-wrapper-->
    <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
-     <div class="brand-logo">
+    <div class="brand-logo">
       <a href="index.html">
-       <img src="../assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+       <img src="assets/images/favicon.png" class="favicon" alt="favicon">
         <h5 class="logo-text">GCS PROJETS</h5>
      </a>
    </div>
    <ul class="sidebar-menu do-nicescrol">
       <li class="sidebar-header">NAVIGATION</li>
       <li>
-        <a href="../index.php">
+        <a href="../dashboard.php">
           <i class="zmdi zmdi-view-dashboard"></i> <span>HOME</span>
         </a>
       </li>
@@ -80,11 +82,11 @@ include "../assets/php/query.php";
           <i class="zmdi zmdi-invert-colors"></i> <span>Utilisateurs</span>
         </a>
       </li>
-<li>
+<!-- <li>
       <a href="../projet_produit.php">
           <i class="zmdi zmdi-assignment-o"></i> <span>Projets_Produits</span>
           </a>
-    </li>
+    </li> -->
 
 
       <!--<li>
@@ -115,7 +117,6 @@ include "../assets/php/query.php";
    
    </div>
    <!--End sidebar-wrapper-->
-
 <!--Start topbar header-->
 <header class="topbar-nav">
  <nav class="navbar navbar-expand fixed-top">
@@ -125,31 +126,10 @@ include "../assets/php/query.php";
        <i class="icon-menu menu-icon"></i>
      </a>
     </li>
-    <li class="nav-item">
-      <form class="search-bar">
-        <input type="text" class="form-control" placeholder="Enter keywords">
-         <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-      </form>
-    </li>
   </ul>
      
   <ul class="navbar-nav align-items-center right-nav-link">
-    <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-envelope-open-o"></i></a>
-    </li>
-    <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-bell-o"></i></a>
-    </li>
-    <li class="nav-item language">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-        </ul>
+      <!-- <i class="fa fa-envelope-open-o"></i></a> -->
     </li>
     <li class="nav-item">
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
@@ -161,26 +141,19 @@ include "../assets/php/query.php";
            <div class="media">
              <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
             <div class="media-body">
-            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-            <p class="user-subtitle">mccoy@example.com</p>
+            <h6 class="mt-2 user-title"><?php echo $_SESSION['nom_utilisateur'] ?> </h6>
+            <p class="user-subtitle"><?php echo  $_SESSION['email_utilisateur'] ?></p>
             </div>
            </div>
           </a>
         </li>
         <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+        <li class="dropdown-item"> <a href="assets/php/logout.php"><i class="icon-power mr-2"></i> Deconnexion</li></a>
       </ul>
     </li>
   </ul>
 </nav>
 </header>
-
 
 
 <div class="clearfix"></div>
@@ -214,7 +187,7 @@ include "../assets/php/query.php";
 
   <div class="col-lg-8">
         <div class="card">
-        <div class="card-header">Produit -> Modiffication
+        <div class="card-header">Produit -> Modification
             
                 
                     <div class="alert alert-danger alert-dismissible" role="alert">
@@ -277,11 +250,11 @@ include "../assets/php/query.php";
 
                     $id = $_GET['id_produit'];
 
-                    $query_produit= "SELECT * FROM produit WHERE id_produit =:id";
-                    $query_prepare=$pdo->prepare($query_categorie);
+                    $query_produit= "SELECT * FROM produit p INNER JOIN categorie_produit c ON p.id_categorie_produit = c.id_categorie_produit WHERE p.id_produit =:id";
+                    $query_prepare=$pdo->prepare($query_produit);
                     $query_prepare->execute(array(':id'=>$id));
                     $produit=$query_prepare->fetch();
-
+                    
                     echo "<input type='text' name='nom_produit' value='$produit[nom_produit]' class='form-control' id='input-1' required>";
 
                      echo "<input type='hidden' name='id' value='$id'>"
@@ -291,22 +264,24 @@ include "../assets/php/query.php";
                     <!-- name = description -->
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description_produit" rows="3" maxlength="60"></textarea>
+                    <textarea class="form-control" id="description" name="description_produit" rows="3" maxlength="60"><?php echo $produit["description_produit"] ; ?> </textarea>
                 </div>
 
                 <!-- name = id_cat_produit-->
 
+
                 <div class="form-group form-float">
                   <label for="categorie_produit"> categorie produit</label>
-                                    <select class="form-control" required="" name="id_categorie_produit">
-                                               <?php
-                                                  while($row_categorie_produit=$statement_categorie_produit->fetch())
-                                                    {
-                                                        echo "<option value=".$row_categorie_produit['id_categorie_produit'].">". $row_categorie_produit['libelle_categorie_produit']." </option>";
-                                                    }
-                                                ?>
-                                    </select>
-                                </div>
+                    <select class="form-control" required="" name="id_categorie_produit">
+                       <?php
+                        echo "<option selected value=".$produit['id_categorie_produit'].">". $produit['libelle_categorie_produit']." </option>";
+                          while($row_categorie_produit=$statement_categorie_produit->fetch())
+                            {
+                                echo "<option value=".$row_categorie_produit['id_categorie_produit'].">". $row_categorie_produit['libelle_categorie_produit']." </option>";
+                            }
+                        ?>
+                    </select>
+                </div>
 
 
                   <!-- name = valider  -->
@@ -671,7 +646,7 @@ include "../assets/php/query.php";
   <!--Start footer-->
   <footer class="footer">
       <div class="container">
-        <div class="text-center">
+        <div class="text-center text-white">
           Copyright © 2018 Dashtreme Admin
         </div>
       </div>

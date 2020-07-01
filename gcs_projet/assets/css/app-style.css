@@ -35,7 +35,7 @@ body {
 }
 
 select option {
-    background: #000;
+    background: rgba(6, 50, 70, 0.58)
 }
 /*
 ::placeholder {
@@ -53,7 +53,7 @@ select option {
 }
 */
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-	  color: #ffffff;
+	  color: #000000;
 }
 .h1, h1 {
 	font-size: 48px;
@@ -227,8 +227,8 @@ hr {
 .col-xl-12,
 .col-xl-2,
 .col-xl-3,
-.col-xl-4,
 .col-xl-5,
+.col-xl-6,
 .col-xl-6,
 .col-xl-7,
 .col-xl-8,
@@ -246,7 +246,7 @@ hr {
 }
 
 #sidebar-wrapper {
-  background-color: rgba(0,0,0,.2);
+  background:linear-gradient(to left, rgb(22, 220, 115),rgb(7, 107, 79));
   position: fixed;
   top: 0px;
   left: 0px;
@@ -1034,12 +1034,12 @@ body.bg-theme15 {
 
 .btn-light{
 	color: #fff;
-	background-color: rgba(255,255,255,.125);
+	background-color: rgb(76, 175, 80);
 	border-color: rgba(255,255,255,.125);
 }
 .btn-light:hover {
 	color: #fff;
-	background-color: rgba(255, 255, 255, 0.18);
+	background-color:rgb(27, 132, 31);
 	border-color: rgba(255, 255, 255, 0.18);
 }
 .btn-light.focus, .btn-light:focus {
@@ -1052,7 +1052,7 @@ body.bg-theme15 {
 }
 .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
 	color: #fff;
-	background-color: rgba(255,255,255,.125);
+	background-color: rgb(27, 132, 31);
 	border-color: rgba(255,255,255,.125);
 }
 .btn-light:not(:disabled):not(.disabled).active:focus, .btn-light:not(:disabled):not(.disabled):active:focus, .show>.btn-light.dropdown-toggle:focus {

@@ -1,4 +1,6 @@
 <?php
+include 'assets/php/functions.php';
+session_start();
 include "assets/php/query.php";
 ?>
 <!DOCTYPE html>
@@ -55,15 +57,12 @@ include "assets/php/query.php";
         </a>
       </li>
 
-      
-
       <li>
         <a href="projet.php">
           <i class="zmdi zmdi-format-list-bulleted"></i> <span>Projet</span>
         </a>
       </li>
 
-     
       <li>
         <a href="categorie_produit.php">
           <i class="zmdi zmdi-calendar-check"></i> <span>Categorie produit</span>
@@ -71,48 +70,17 @@ include "assets/php/query.php";
         </a>
       </li>
 
-    <li>
-      <a href="produit.php">
-          <i class="zmdi zmdi-assignment-check"></i> <span>Produit</span>
-          </a>
-    </li>
-    <li>
-        <a href="utilisateur.php">
-          <i class="zmdi zmdi-invert-colors"></i> <span>Utilisateurs</span>
-        </a>
-      </li>
-
-   <!-- <li>
-      <a href="projet_produit.php">
-          <i class="zmdi zmdi-assignment-o"></i> <span>Projets_Produits</span>
-          </a>
-    </li>
- -->
-
-      <!--<li>
-        <a href="profile.html">
-          <i class="zmdi zmdi-face"></i> <span>Profile</span>
-        </a>
-      </li>
-
       <li>
-        <a href="login.html" target="_blank">
-          <i class="zmdi zmdi-lock"></i> <span>Login</span>
-        </a>
+        <a href="produit.php">
+            <i class="zmdi zmdi-assignment-check"></i> <span>Produit</span>
+            </a>
       </li>
-
-       <li>
-        <a href="register.html" target="_blank">
-          <i class="zmdi zmdi-account-circle"></i> <span>Remarque</span>
-        </a>
+      <li>
+          <a href="utilisateur.php">
+            <i class="zmdi zmdi-invert-colors"></i> <span>Utilisateurs</span>
+          </a>
       </li>
-
-      <li class="sidebar-header">LABELS</li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-coffee text-danger"></i> <span>Important</span></a></li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-chart-donut text-success"></i> <span>Warning</span></a></li>
-      <li><a href="javaScript:void();"><i class="zmdi zmdi-share text-info"></i> <span>Information</span></a></li>-->
-
-    </ul>
+  </ul>
    
    </div>
    <!--End sidebar-wrapper-->
@@ -126,32 +94,11 @@ include "assets/php/query.php";
        <i class="icon-menu menu-icon"></i>
      </a>
     </li>
-    <!-- <li class="nav-item">
-      <form class="search-bar">
-        <input type="text" class="form-control" placeholder="Enter keywords">
-         <a href="javascript:void();"><i class="icon-magnifier"></i></a>
-      </form>
-    </li> -->
   </ul>
      
   <ul class="navbar-nav align-items-center right-nav-link">
-   <!--  <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-envelope-open-o"></i></a>
+     <!--  <i class="fa fa-envelope-open-o"></i></a> -->
     </li>
-    <li class="nav-item dropdown-lg">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
-      <i class="fa fa-bell-o"></i></a>
-    </li>
-    <li class="nav-item language">
-      <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();"><i class="fa fa-flag"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
-          <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
-        </ul>
-    </li> -->
     <li class="nav-item">
       <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
         <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
@@ -162,20 +109,14 @@ include "assets/php/query.php";
            <div class="media">
              <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
             <div class="media-body">
-            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-            <p class="user-subtitle">mccoy@example.com</p>
+            <h6 class="mt-2 user-title"><?php echo $_SESSION['nom_utilisateur'] ?> </h6>
+            <p class="user-subtitle"><?php echo  $_SESSION['email_utilisateur'] ?></p>
             </div>
            </div>
           </a>
         </li>
         <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-        <li class="dropdown-divider"></li>
-        <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+        <li class="dropdown-item"> <a href="assets/php/logout.php"><i class="icon-power mr-2"></i> Deconnexion</li></a>
       </ul>
     </li>
   </ul>
@@ -187,29 +128,7 @@ include "assets/php/query.php";
     <div class="content-wrapper">
       <div class="container-fluid">
 
-   
-<!--
-        
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert">
-            <font style="vertical-align: inherit;">
-              <font style="vertical-align: inherit;">×</font>
-            </font>
-          </button>
-          <div class="alert-message">
-            <span>
-              <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">Connexion Reussie! <br></font>
-              </font>
-            </span>
-          </div>
-        </div>
-      -->
-  
-
 <!--Start User Content-->
-
-
 
 <div class="row m-3">
 
@@ -218,7 +137,7 @@ include "assets/php/query.php";
   </div>
 
   <div class="col-4 offset-4">
-    <a class="btn btn-light" href="produit-create.php">Ajouter un nouveau produit</a>    
+    <a class="btn btn-light" href="produit-create.php">Ajouter un nouveau produit</a>
   </div>
 </div>    
 
@@ -243,23 +162,21 @@ include "assets/php/query.php";
 
 
 
-                                            while ($row_produit=$statement_produit->fetch()) 
-                                        {
-                                                $id_categorie_produit=$row_produit['id_categorie_produit'];
-                                                $query_categorie_produit="SELECT * FROM categorie_produit WHERE id_categorie_produit=:id_categorie_produit ";
-                                                $statement_categorie_produit=$pdo->prepare($query_categorie_produit);
-                                                $statement_categorie_produit->execute(array(':id_categorie_produit'=>$id_categorie_produit));
-                                                $row_categorie_produit=$statement_categorie_produit->fetch();
+          while ($row_produit=$statement_produit->fetch()) 
+      {
+              $id_categorie_produit=$row_produit['id_categorie_produit'];
+              $query_categorie_produit="SELECT * FROM categorie_produit WHERE id_categorie_produit=:id_categorie_produit ";
+              $statement_categorie_produit=$pdo->prepare($query_categorie_produit);
+              $statement_categorie_produit->execute(array(':id_categorie_produit'=>$id_categorie_produit));
+              $row_categorie_produit=$statement_categorie_produit->fetch();
 
-                        echo "<tr>";
-                        echo "<td><p class='c_name'>".$row_produit['nom_produit']."</p></td>";
-                        echo "<td><p class='c_name'>".$row_produit['description_produit']."</p></td>";
-                        echo "<td><i class=''></i>".$row_categorie_produit['libelle_categorie_produit']."</td>";
-                        echo "<td><a class='btn btn-info' href='modifier/modifier_produit.php?id_produit=$row_produit[id_produit]'>Modifier</a>  <a class='btn btn-danger' href='delete/delete_produit.php?id_produit=$row_produit[id_produit]\" onClick=\"return confirm('Voulez-vous vraiment supprimer ce produit')\'>Supprimer</a></td>";
-                                                  //echo"<td>  </td>";
-                        echo "</tr>";
-                                               
-                                               
+              echo "<tr>";
+              echo "<td><p class='c_name'>".$row_produit['nom_produit']."</p></td>";
+              echo "<td><p class='c_name'>".$row_produit['description_produit']."</p></td>";
+              echo "<td><i class=''></i>".$row_categorie_produit['libelle_categorie_produit']."</td>";
+              echo "<td><a class='btn btn-info' href='modifier/modifier_produit.php?id_produit=$row_produit[id_produit]'>Modifier</a>  <a class='btn btn-danger' href='delete/delete_produit.php?id_produit=$row_produit[id_produit]\" onClick=\"return confirm('Voulez-vous vraiment supprimer ce produit')\'>Supprimer</a></td>";
+                                        //echo"<td>  </td>";
+              echo "</tr>";
 
             } 
 

@@ -11,12 +11,12 @@ $query_produit="SELECT * FROM produit";
 $statement_produit=$pdo->prepare($query_produit);
 $statement_produit->execute();
 
-//requete d'affichage des produits
+//requete d'affichage des projets
 $query_projet="SELECT * FROM projet";
 $statement_projet=$pdo->prepare($query_projet);
 $statement_projet->execute();
 
-//Liste les types d'utilisateur
+//Liste les types utilisateur
 $query_typutilisateur="SELECT * FROM type_utilisateur";
 $statement_typutilisateur=$pdo->prepare($query_typutilisateur);
 $statement_typutilisateur->execute();
@@ -31,17 +31,30 @@ $query_date="SELECT NOW()";
 $statement_date=$pdo->prepare($query_date);
 $statement_date->execute();
 $date=$statement_date->fetch();
- 
 
-//Rappel
-//$query_rappel="SELECT * FROM rappel";
-//$statement_rappel=$pdo->prepare($query_rappel);
-//$statement_rappel->execute();
+//INDEXER TOUS LES projets
+$query_projet="SELECT * FROM projet";
+$statement_projet=$pdo->prepare($query_projet);
+$statement_projet->execute();
 
-//Notification
-//$query_notif="SELECT * FROM rappel";
-//$statement_notif=$pdo->prepare($query_notif);
-//$statement_notif->execute();
+//Requete pour compter le nombre total de maintenance en cours
+$today=strtotime(date('d-m-Y'));
+$query_encours="SELECT * FROM appartenir WHERE statut_projet >=:statut_projet";
+$statement_encours=$pdo->prepare($query_encours);
+$statement_encours->execute(array(':statut_projet'=>$today));
+$count_encours=$statement_encours -> rowCount();
+
+//Requete pour compter le nombre total de projet terminé
+$query_termine="SELECT * FROM appartenir WHERE statut_projet <:statut_projet";
+$statement_termine=$pdo->prepare($query_termine);
+$statement_termine->execute(array(':statut_contrat'=>$today));
+$count_termine=$statement_termine -> rowCount();
+
+//Requete pour compter le nombre total de projet 
+$query_total="SELECT * FROM appartenir WHERE statut_projet <:statut_projet";
+$statement_total=$pdo->prepare($query_total);
+$statement_total->execute(array(':statut_contrat'=>$today));
+$count_total=$statement_total -> rowCount();
 
 //Requete pour compter le nombre total de maintenance en cours
 
